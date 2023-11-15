@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import yfinance as yf
 from datetime import datetime, timedelta
+import os
 
 app = Flask(__name__)
 
@@ -21,6 +22,7 @@ def get_historical_data():
 def home():
     return "Welcome to the Stock Data API! Use /historical_data?symbol=SYMBOL to fetch data."
 
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Heroku will supply the PORT environment variable
+    app.run(host='0.0.0.0', port=port, debug=False)  # Turn off debug mode when deploying to production
+
