@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def fetch_historical_data(symbol):
     end_date = datetime.now()
-    start_date = end_date - timedelta(days=90)  # Last three months
+    start_date = end_date - timedelta(days=30)  # Last months
     ticker = yf.Ticker(symbol)
     historical_data = ticker.history(start=start_date, end=end_date)
     return historical_data.to_json()
